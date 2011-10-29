@@ -2,9 +2,8 @@
 # vim: set fileencoding=utf-8 ts=4 sts=4 et:
 
 PRICE_CMD = '/usr/local/bin/printer_pricecalc.py'
-PRINT_CMD = '/home/a004647a/ssn-printer-gui/print-dummy'
-
 LOGO = '/usr/local/share/ssn/StuStaNet_Logo.svg'
+# look also at uploaded.py
 
 import subprocess
 
