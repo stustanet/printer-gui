@@ -13,6 +13,8 @@ pygtk.require('2.0')
 import gtk
 import gobject
 
+from uploaded import UploadedFile
+
 class PrinterGui:
     # file to print
     file = None
@@ -155,7 +157,22 @@ class PrinterGui:
         self.apply_state()
 
     def load_uploaded(self, btn, data):
-        print "GET uploaded file"
+        nonce = self.pin_input.get_text()
+        f = UploadedFile(nonce)
+        f.parse()
+        self.file = f.results['filename']
+        if f.results['duplex'] == '1':
+            self.duplex = 'long'
+        if f.results['blackwhite'] == '1':
+            self.blackwhite = True
+        self.state = 'count'
+        p = f.get_price()
+        self.apply_state()
+        if p:
+            self.price = p
+            self.state = 'print'
+            self.apply_state()
+
 
     def checkbox_changed(self, btn, data):
         if self.simplex_radio.get_active():
